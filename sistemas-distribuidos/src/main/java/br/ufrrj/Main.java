@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URI;
 
 public class Main {
-    public static final String BASE_URI = "http://172.25.140.114:8080/";
+    public static final String BASE_URI = "http://192.168.195.246:8080/";
 
     public static HttpServer startServer() {
         final ResourceConfig rc = new ResourceConfig().packages("br.ufrrj");
