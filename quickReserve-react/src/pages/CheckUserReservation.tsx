@@ -1,4 +1,4 @@
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
+import { Button, Card, CardBody, CardFooter, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
 import { Box, Center, FormControl, FormLabel, Heading, Input, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 import { Form } from "react-router-dom";
@@ -54,24 +54,32 @@ export const CheckUserReservation = () => {
                                 motionPreset='slideInBottom'>
                                 <ModalOverlay />
                                 <ModalContent>
-                                    <ModalHeader>Modal Title</ModalHeader>
+                                    <ModalHeader>Reservas do usuario</ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody>
+                                        <Heading  display="flex" justifyContent="center">{user}</Heading>
                                         <div> {aux?.map((x) => {
                                             return (
                                                 <>
-                                                    <h1>{x.salaId}</h1>
-                                                    <h2>{x.usuario}</h2>
+                                                    <Card direction={{ base: 'column', sm: 'row' }} overflow='hidden' variant='outline'  margin="0.5rem" >
+
+                                                    <Stack>
+                                                        <CardBody>
+                                                        <Text py='2'>
+                                                        <p>Sala reservada: {x.salaId}</p>
+                                                        <p>Data: {x.diaString}</p>
+                                                        <p>Horário: {x.hora}h</p>
+                                                        </Text>
+                                                        </CardBody>
+
+                                                    </Stack>
+                                                    </Card>
+                                                    
                                                 </>
                                             );
                                         })} </div>
                                     </ModalBody>
-                                    <ModalFooter>
-                                        <Button colorScheme='blue' mr={3} onClick={onClose}>
-                                            Close
-                                        </Button>
-                                        <Button variant='ghost'>Secondary Action</Button>
-                                    </ModalFooter>
+                                    
                                 </ModalContent>
                             </Modal>
                         </FormControl>

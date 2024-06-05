@@ -1,5 +1,5 @@
 import { Box, Button, Center, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure, useToast } from "@chakra-ui/react";
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Form } from "react-router-dom";
 
 const fetchApi = async (salaId: string, usuario: string, diaString: string, hora: number) => {
