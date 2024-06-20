@@ -1,26 +1,47 @@
-import { Box, Button, Center, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Card, CardBody, Center, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { Form } from "react-router-dom";
 
+type ReservaSala = {
+    hora: number;
+    salaId: string;
+    usuario: string;
+    diaString: string;
+};
+
+
+const fetchApi = async (value: string): Promise<ReservaSala[]> => {
+    const result = await fetch(`http://192.168.195.246:8080/sala/consultar-reservas-sala/` + value)
+        .then((res) => res.json())
+        .then((res) => {
+            return res;
+        });
+    return result;
+}
+
 export const CheckReservation = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [room, setReservation] = useState('');
+    const [checkReservation, setCheckReservation] = useState('');
+    const [aux, setAux] = useState<ReservaSala[]>([]);
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
-        if (!room) {
+        if (!checkReservation) {
             // Se o campo da sala não estiver preenchido, não abra o modal
             return;
         }
 
         // Se todos os campos estiverem preenchidos, abra o modal
-        onOpen();
+        fetchApi(checkReservation).then((aux) => {
+            setAux(aux);
+            onOpen();
+        });
     };
     return (
         <Center height="100vh" width="100vw">
             <Box maxW="xl" width="100%" maxWidth="500px" borderWidth="3px" borderRadius="lg" overflow="hidden" p={5}>
-                <Heading mb={5}>Consulte a sua reserva</Heading>
+                <Heading mb={5}>Consulte uma reserva</Heading>
                 <Stack spacing={5} direction="column" >
                     <Form onSubmit={handleSubmit}>
                         <FormControl isRequired>
@@ -29,7 +50,7 @@ export const CheckReservation = () => {
                             <FormLabel marginLeft="5px">Data da reserva </FormLabel>
                             <Input placeholder='ex: 30-07-2004' />
                             <FormLabel marginLeft="5px">Horário da reserva </FormLabel>
-                            <Input placeholder='ex: 15h' value={room} onChange={(e) => setReservation(e.target.value)} />
+                            <Input placeholder='ex: 15h' value={checkReservation} onChange={(e) => setCheckReservation(e.target.value)} />
                             <Button mt={4} colorScheme='teal' type='submit'>
                                 Enviar
                             </Button>
@@ -43,14 +64,31 @@ export const CheckReservation = () => {
                                     <ModalHeader>Modal Title</ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody>
-                                        <div>oi aaaaa</div>
+                                        <div>
+                                        {aux.length > 0 ? (
+                                            aux.map((x) => (
+                                                <div>
+                                                <Card direction={{ base: 'column', sm: 'row' }} overflow='hidden' variant='outline'  margin="0.5rem" >
+
+                                                <Stack>
+                                                    <CardBody>
+                                                    <Heading size='md'><p>{x.usuario}</p></Heading>
+
+                                                    <Text py='2'>
+                                                    <p>Data: {x.diaString}</p>
+                                                    <p>Horario reservado: {x.hora}h</p>
+                                                    </Text>
+                                                    </CardBody>
+
+                                                </Stack>
+                                                </Card>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div>Nenhuma reserva encontrada.</div>
+                                        )}
+                                        </div>
                                     </ModalBody>
-                                    <ModalFooter>
-                                        <Button colorScheme='blue' mr={3} onClick={onClose}>
-                                            Close
-                                        </Button>
-                                        <Button variant='ghost'>Secondary Action</Button>
-                                    </ModalFooter>
                                 </ModalContent>
                             </Modal>
                         </FormControl>

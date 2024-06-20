@@ -1,5 +1,5 @@
 import { Box, Button, Center, Heading, Stack } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 /*export const Select = () => {
     const navigate = useNavigate();
@@ -32,7 +32,12 @@ export const Select = () => {
     };
 
     return (
-        <Center height="100vh" width="100vw">
+        <Center height="100vh" width="100vw" flexDirection="column" >
+            <Stack spacing={3} color='teal'>
+            <Heading fontFamily="heading" as='h1' size='4xl' noOfLines={1} padding='2rem' fontWeight='bold'>
+                QuickReserve
+            </Heading>
+            </Stack>
             <Box maxW="xl" width="100%" maxWidth="500px" borderWidth="3px" borderRadius="lg" overflow="hidden" p={5}>
                 <Heading mb={5}>Selecione uma das ações</Heading>
                 <Stack spacing={5} direction="column" align="center">

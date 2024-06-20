@@ -1,6 +1,9 @@
-import { Box, Button, Center, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure, useToast } from "@chakra-ui/react";
+import { Box, Button, Center, FormControl, FormLabel, Heading, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, useDisclosure, useToast } from "@chakra-ui/react";
 import { FormEvent, useState } from "react";
 import { Form } from "react-router-dom";
+import { ArrowBackIcon } from '@chakra-ui/icons'
+
+
 
 const fetchApi = async (salaId: string, usuario: string, diaString: string, hora: number) => {
     const result = await fetch(`http://192.168.195.246:8080/sala/`, {
@@ -64,21 +67,33 @@ export const ReservationRegistration = () => {
                     });
                 }
         });
-       
 
+        
         // Limpar campos após a submissão
         setRoom('');
         setName('');
         setDate('');
         setTime(0);
     };
-
+    
     const { isOpen, onClose } = useDisclosure()
 
+ 
+    
     return (
         <Center height="100vh" width="100vw">
             <Box maxW="xl" width="100%" maxWidth="500px" borderWidth="3px" borderRadius="lg" overflow="hidden" p={5}>
+            <Stack flexDirection="row" justifyContent="space-between" >
                 <Heading mb={5}>Reserve sua sala</Heading>
+                <IconButton
+                    isRound={true}
+                    variant='solid'
+                    colorScheme='teal'
+                    aria-label='Done'
+                    fontSize='20px'
+                    icon={<ArrowBackIcon />}
+                />
+                </Stack>
                 <Stack spacing={5} direction="column" >
                     <Form onSubmit={handleSubmit}>
                         <FormControl isRequired>

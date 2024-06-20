@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
+import { Button, Card, CardBody, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
 import { Box, Center, FormControl, FormLabel, Heading, Input, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 import { Form } from "react-router-dom";
