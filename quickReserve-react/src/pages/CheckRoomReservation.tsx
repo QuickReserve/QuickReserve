@@ -11,7 +11,7 @@ type ReservaSala = {
 };
 
 const fetchApi = async (value: string): Promise<ReservaSala[]> => {
-    const result = await fetch(`http://192.168.195.246:8080/sala/consultar-reservas-sala/` + value)
+    const result = await fetch(`http://192.168.0.166:8080/sala/consultar-reservas-sala/` + value)
         .then((res) => res.json());
     return result;
 }

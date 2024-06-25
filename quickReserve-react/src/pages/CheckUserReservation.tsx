@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
 
 const fetchApi = async (value: string) => {
-    const result = await fetch(`http://192.168.195.246:8080/sala/consultar-reservas/` + value)// retorna texto plano
+    const result = await fetch(`http://192.168.0.166:8080/sala/consultar-reservas/` + value)// retorna texto plano
         .then((res) => res.json())//transforma em um objeto javaScript
         .then((res) => {
             return res;

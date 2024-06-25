@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 
 const fetchApi = async (salaId: string, usuario: string, diaString: string, hora: number) => {
-    const result = await fetch(`http://192.168.195.246:8080/sala/`, {
+    const result = await fetch(`http://192.168.0.166:8080/sala/`, {
         method: "POST",
         body: JSON.stringify({
             salaId,
@@ -67,7 +67,16 @@ export const ReservationRegistration = () => {
                         isClosable: true,
                     });
                 }
-        });
+        }).catch(erro =>
+        {
+            toast({
+                title: 'Erro',
+                description: erro.mensage,
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+            });
+        })
 
         
         // Limpar campos após a submissão

@@ -15,7 +15,7 @@ type FetchApiParams = {
 };
 
 const fetchApi = async ({ room, date, time }: FetchApiParams) => {
-    const response = await fetch(`http://192.168.195.246:8080/sala/${room}/${date}/${time}`, {
+    const response = await fetch(`http://192.168.0.166:8080/sala/${room}/${date}/${time}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
