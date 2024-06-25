@@ -1,7 +1,8 @@
-import { Button, Card, CardBody, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { Button, Card, CardBody, IconButton, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
 import { Box, Center, FormControl, FormLabel, Heading, Input, Stack } from "@chakra-ui/react";
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 
 const fetchApi = async (value: string) => {
     const result = await fetch(`http://192.168.195.246:8080/sala/consultar-reservas/` + value)// retorna texto plano
@@ -18,6 +19,12 @@ export const CheckUserReservation = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [user, setUser] = useState('');
     const [aux, setAux] = useState<any[] | null>(null);
+
+    const navigate = useNavigate();
+    
+    const handleNavigateClick = () => {
+            navigate("/");
+        };
 
 
     const handleSubmit = (e: { preventDefault: () => void; }) => {
@@ -38,7 +45,17 @@ export const CheckUserReservation = () => {
     return (
         <Center height="100vh" width="100vw">
             <Box maxW="xl" width="100%" maxWidth="500px" borderWidth="3px" borderRadius="lg" overflow="hidden" p={5}>
-                <Heading mb={5}>Consulte a sua reserva</Heading>
+                <Stack flexDirection="row" justifyContent="space-between" >
+                <Heading mb={5}>Consulte reserva do usuário</Heading>
+                <IconButton onClick={handleNavigateClick}
+                    isRound={true}
+                    variant='solid'
+                    colorScheme='teal'
+                    aria-label='Done'
+                    fontSize='20px'
+                    icon={<ArrowBackIcon />}
+                />
+                </Stack>
                 <Stack spacing={5} direction="column" >
                     <Form onSubmit={handleSubmit}>
                         <FormControl isRequired>
@@ -54,7 +71,7 @@ export const CheckUserReservation = () => {
                                 motionPreset='slideInBottom'>
                                 <ModalOverlay />
                                 <ModalContent>
-                                    <ModalHeader>Reservas do usuario</ModalHeader>
+                                    <ModalHeader>Reservas do usuário</ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody>
                                         <Heading  display="flex" justifyContent="center">{user}</Heading>

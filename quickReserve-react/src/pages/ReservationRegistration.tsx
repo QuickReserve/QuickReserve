@@ -2,6 +2,7 @@ import { Box, Button, Center, FormControl, FormLabel, Heading, IconButton, Input
 import { FormEvent, useState } from "react";
 import { Form } from "react-router-dom";
 import { ArrowBackIcon } from '@chakra-ui/icons'
+import { useNavigate } from "react-router-dom"
 
 
 
@@ -78,14 +79,20 @@ export const ReservationRegistration = () => {
     
     const { isOpen, onClose } = useDisclosure()
 
- 
+    
+    const navigate = useNavigate();
+    
+    const handleNavigateClick = () => {
+            navigate("/");
+        };
+    
     
     return (
         <Center height="100vh" width="100vw">
             <Box maxW="xl" width="100%" maxWidth="500px" borderWidth="3px" borderRadius="lg" overflow="hidden" p={5}>
             <Stack flexDirection="row" justifyContent="space-between" >
                 <Heading mb={5}>Reserve sua sala</Heading>
-                <IconButton
+                <IconButton onClick={handleNavigateClick}
                     isRound={true}
                     variant='solid'
                     colorScheme='teal'

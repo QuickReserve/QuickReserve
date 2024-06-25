@@ -1,10 +1,11 @@
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import { 
-    Box, Button, Center, FormControl, FormLabel, Heading, Input, 
+    Box, Button, Center, FormControl, FormLabel, Heading, IconButton, Input, 
     Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, 
     ModalOverlay, Stack, useDisclosure, useToast 
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 
 // Definindo os tipos dos parâmetros da função fetchApi
 type FetchApiParams = {
@@ -30,6 +31,12 @@ export const RemoveReservation = () => {
     const [room, setRoom] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
+
+    const navigate = useNavigate();
+
+    const handleNavigateClick = () =>{
+        navigate("/");
+    }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -83,7 +90,18 @@ export const RemoveReservation = () => {
     return (
         <Center height="100vh" width="100vw">
             <Box maxW="xl" width="100%" maxWidth="500px" borderWidth="3px" borderRadius="lg" overflow="hidden" p={5}>
+            <Stack flexDirection="row" justifyContent="space-between" >
                 <Heading mb={5}>Remova a sua reserva</Heading>
+                <IconButton onClick={handleNavigateClick}
+                    isRound={true}
+                    variant='solid'
+                    colorScheme='teal'
+                    aria-label='Done'
+                    fontSize='20px'
+                    icon={<ArrowBackIcon />}
+                />
+                </Stack>
+                
                 <Stack spacing={5} direction="column">
                     <Form onSubmit={handleSubmit}>
                         <FormControl isRequired>
