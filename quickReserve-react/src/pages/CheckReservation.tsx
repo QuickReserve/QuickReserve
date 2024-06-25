@@ -1,6 +1,7 @@
-import { Box, Button, Card, CardBody, Center, FormControl, FormLabel, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { Box, Button, Card, CardBody, Center, FormControl, FormLabel, Heading, IconButton, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 
 type ReservaSala = {
     hora: number;
@@ -24,6 +25,12 @@ export const CheckReservation = () => {
     const [checkReservation, setCheckReservation] = useState('');
     const [aux, setAux] = useState<ReservaSala[]>([]);
 
+    const navigate = useNavigate();
+
+    const handleNavigateClick = () => {
+        navigate("/");
+    }
+
     const handleSubmit = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
@@ -41,7 +48,17 @@ export const CheckReservation = () => {
     return (
         <Center height="100vh" width="100vw">
             <Box maxW="xl" width="100%" maxWidth="500px" borderWidth="3px" borderRadius="lg" overflow="hidden" p={5}>
+                <Stack flexDirection="row" justifyContent="space-between" >
                 <Heading mb={5}>Consulte uma reserva</Heading>
+                <IconButton onClick={handleNavigateClick}
+                    isRound={true}
+                    variant='solid'
+                    colorScheme='teal'
+                    aria-label='Done'
+                    fontSize='20px'
+                    icon={<ArrowBackIcon />}
+                />
+                </Stack>
                 <Stack spacing={5} direction="column" >
                     <Form onSubmit={handleSubmit}>
                         <FormControl isRequired>
@@ -61,7 +78,7 @@ export const CheckReservation = () => {
                                 motionPreset='slideInBottom'>
                                 <ModalOverlay />
                                 <ModalContent>
-                                    <ModalHeader>Modal Title</ModalHeader>
+                                    <ModalHeader>Consulte uma reserva</ModalHeader>
                                     <ModalCloseButton />
                                     <ModalBody>
                                         <div>
